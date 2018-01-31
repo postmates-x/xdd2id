@@ -1,7 +1,14 @@
 language: python
 
+cache: pip
+
+install:
+  - pip install --upgrade pipenv
+  - pipenv install --dev
+
 script:
-  - python setup.py sdist
+  - pipenv check --style .
+  - pipenv run python setup.py sdist
 
 deploy:
   provider: pypi
