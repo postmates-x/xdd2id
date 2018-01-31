@@ -2,6 +2,18 @@
 xdd2id: CANopen XML dictionary to Ingenia dictionary converter tool
 ===================================================================
 
+.. image:: https://travis-ci.org/ingeniamc/xdd2id.svg?branch=master
+    :target: https://travis-ci.org/ingeniamc/xdd2id
+    :alt: Build Status
+
+.. image:: https://img.shields.io/pypi/v/xdd2id.svg
+    :target: https://pypi.python.org/pypi/xdd2id
+    :alt: PyPI Version
+
+.. image:: https://api.codacy.com/project/badge/Grade/d8384ef1e0f148c1b92b012b482044ce
+    :target: https://www.codacy.com/app/gmarull/xdd2id
+    :alt: Code Quality
+
 ``xdd2id`` is a tool to convert CANopen XML dictionaries (XDD) to the
 IngeniaDictionary format.
 
