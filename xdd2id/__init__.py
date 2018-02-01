@@ -41,12 +41,12 @@ _DATA_TYPES = {
 """ dict: Mapping for Supported CANopen data types. """
 
 _ACCESS_TYPES = {
-    'const': 'ro',
-    'ro': 'ro',
-    'read': 'ro',
+    'const': 'r',
+    'ro': 'r',
+    'read': 'r',
     'rw': 'rw',
     'readWrite': 'rw',
-    'write': 'wo'
+    'write': 'w'
 }
 """ dict: Mapping for Supported CANopen access types. """
 
