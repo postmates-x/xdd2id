@@ -5,7 +5,7 @@ from ._ids import IDS_MAP
 from ._phy import PHY_MAP
 
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 """ str: Version. """
 
 
