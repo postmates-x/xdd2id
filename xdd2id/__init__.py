@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
 from ._ids import IDS_MAP
+from ._phy import PHY_MAP
 
 
 __version__ = '0.1.0'
@@ -41,12 +42,12 @@ _DATA_TYPES = {
 """ dict: Mapping for Supported CANopen data types. """
 
 _ACCESS_TYPES = {
-    'const': 'ro',
-    'ro': 'ro',
-    'read': 'ro',
+    'const': 'r',
+    'ro': 'r',
+    'read': 'r',
     'rw': 'rw',
     'readWrite': 'rw',
-    'write': 'wo'
+    'write': 'w'
 }
 """ dict: Mapping for Supported CANopen access types. """
 
@@ -133,12 +134,16 @@ def convert(f_in, f_out):
             else:
                 identifier = IDS_MAP[address]
 
+            # obtain physical units
+            phy = PHY_MAP[address] if address in PHY_MAP else 'none'
+
             regs.append({
                 'attrib': {
                     'id': identifier,
                     'address': address,
                     'dtype': dataType,
-                    'access': accessType
+                    'access': accessType,
+                    'phy': phy
                 },
                 'label': name
             })
