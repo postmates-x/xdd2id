@@ -47,7 +47,8 @@ _ACCESS_TYPES = {
     'read': 'r',
     'rw': 'rw',
     'readWrite': 'rw',
-    'write': 'w'
+    'write': 'w',
+    'wo' : 'w',
 }
 """ dict: Mapping for Supported CANopen access types. """
 
@@ -72,7 +73,10 @@ def convert(f_in, f_out):
         # obtain all CANopen objects/subobjects
         objs = []
         for obj in xdd.findall('.//CANopenObject'):
-            if obj.attrib['index'] == _FW_VERSION_INDEX:
+            index = obj.attrib['index']
+            if index[:2] == "0x": # strip 0x
+                index = index[2:]
+            if index == _FW_VERSION_INDEX:
                 firmwareVersionNumber = obj.attrib['defaultValue']
 
             if obj.attrib['objectType'] == _VAR:
@@ -93,6 +97,11 @@ def convert(f_in, f_out):
         for obj in objs:
             index = obj.attrib['index']
             subIndex = obj.attrib['subIndex']
+            # strip 0x
+            if index[:2] == "0x":
+                index = index[2:]
+            if subIndex[:2] == "0x":
+                subIndex = subIndex[2:]
             name = obj.attrib['name']
 
             # obtain data type / access type (on parameters or the object)
@@ -113,6 +122,8 @@ def convert(f_in, f_out):
             else:
                 dataType = obj.attrib['dataType']
                 accessType = obj.attrib['accessType']
+
+            actualValue = obj.attrib['actualValue']
 
             # convert data type/ access type
             if dataType not in _DATA_TYPES:
@@ -143,9 +154,10 @@ def convert(f_in, f_out):
                     'address': address,
                     'dtype': dataType,
                     'access': accessType,
-                    'phy': phy
+                    'phy': phy,
+                    'value': actualValue,
                 },
-                'label': name
+                'label': name,
             })
 
         # create IngeniaDictionary
