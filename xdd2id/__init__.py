@@ -141,7 +141,7 @@ def convert(f_in, f_out):
             address = subIndex + index
             if address not in IDS_MAP:
                 identifier = name.upper().replace(' ', '_').replace(' - ', '_')
-                identifier = ''.join(x for x in identifier if x.isalpha())
+                identifier = ''.join(x for x in identifier if x.isalnum())
             else:
                 identifier = IDS_MAP[address]
 
